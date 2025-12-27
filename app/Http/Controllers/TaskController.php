@@ -32,7 +32,7 @@ class TaskController extends Controller
         // 👑 Admin: allow user filter
         if (auth()->user()->role === 'admin') {
             $filters['assigned_user_id'] = $request->assigned_user_id ?? null;
-            $users = \App\Models\User::where('role', 'user')->get();
+            $users = User::where('role', 'user')->get();
         } 
         // 👤 User: restrict to own tasks
         else {
