@@ -16,7 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
 //Logout
 Route::post('/logout', [UserController::class, 'logout']);
 
-   
+
    
 });
 
@@ -25,6 +25,7 @@ Route::middleware(['auth:sanctum', 'admin'])
     ->as('api.admin.')   // 👈 IMPORTANT
     ->group(function () {
 
+        //users all api
         Route::apiResource('users', AdminUserController::class);
 
         Route::apiResource('tasks', AdminTaskController::class);
