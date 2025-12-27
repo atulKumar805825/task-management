@@ -17,36 +17,6 @@ class TaskAssignmentController extends Controller
         $this->service = $service;
     }
 
-    public function assignForm($taskId)
-    {
-        abort_unless(auth()->user()->role === 'admin', 403);
-
-        $task = Task::findOrFail($taskId);
-        $users = User::where('role','user')->get();
-
-        return view('tasks.assign', compact('task','users'));
-    }
-
-    public function assign(Request $request, $taskId)
-    {
-        abort_unless(auth()->user()->role === 'admin', 403);
-
-        $request->validate([
-            'users' => 'required|array'
-        ]);
-
-        $task = Task::findOrFail($taskId);
-
-        $this->service->assign(
-            $task,
-            $request->users,
-            auth()->id()
-        );
-
-        return redirect()->route('tasks.index')
-            ->with('success','Task assigned');
-    }
-
     public function addMoreUsers(Request $request, $taskId)
     {
         abort_unless(auth()->user()->role === 'admin', 403);
