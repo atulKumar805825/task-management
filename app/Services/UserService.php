@@ -2,6 +2,8 @@
 namespace App\Services;
 
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserService
 {
@@ -20,7 +22,7 @@ class UserService
     }
 
     public function createUser(array $data) {
-        $data['password'] = md5($data['password']); // assignment rule
+        $data['password'] = Hash::make($data['password']); // assignment rule
         return $this->repo->create($data);
     }
 
